@@ -1,14 +1,12 @@
 ---
-title: "R Notebook"
+title: "Logistic Regression"
 output: html_notebook
 ---
 
  CARREGANDO OS DADOS DAS ELEIÇÕES
 ```{r}
 # Notebook de dados descaracterizados de uma eleição
-
 eleicao = read.csv('Eleicao.csv', sep = ';', header = T)
-
 ```
 
 VISUALIZANDO OS DADOS
@@ -16,35 +14,25 @@ VISUALIZANDO OS DADOS
 -> RELAÇÃO ENTRE DESPESAS E A SITUAÇÃO DO CANDIDATO
 
 ```{r}
-
 plot(eleicao$DESPESAS, eleicao$SITUACAO)
-
-summary(eleicao)
-
+summary(eleicao
 ```
 
 CORRELAÇÃO
 
 ```{r}
-
 cor(eleicao$DESPESAS, eleicao$SITUACAO)
-
 ```
 MODELO DE REGRESSÃO LOGISTICA
 
 ```{r}
-
 modelo = glm(SITUACAO ~ DESPESAS, data = eleicao, family = "binomial")
 summary(modelo)
-
 ```
 
 ```{r}
-
 plot(eleicao$DESPESAS, eleicao$SITUACAO, col='red', pch=20)
 points(eleicao$DESPESAS, modelo$fitted, pch=4)
-
-
 ```
 CRIANDO O MODELO DE PREVISAO LOGISTICA
 ```{r}
@@ -58,8 +46,6 @@ confusao = table(prever, eleicao$SITUACAO)
 confusao
 taxaacerto = (confusao[1] + confusao[4])/sum(confusao)
 taxaacerto
-
-
 ```
 
 ```{r}
